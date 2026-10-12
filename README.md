@@ -68,3 +68,24 @@ fe/
 | dist/assets/index-*.css | 约 9 KB | 约 2 KB |
 
 `china.json` 与 ECharts 仅在首页图表渲染时按需加载，不再阻塞开屏页。
+
+## 常见问题
+
+### `file watcher error: EBUSY: resource busy or locked, watch '...\work\...'`
+
+**原因**：Vite 默认监视项目下所有文件，而 `work/` 目录用于存放本地验证脚本、截图和临时浏览器配置。
+如果曾用这个目录作为无头浏览器的 `--user-data-dir`，Chrome 会在其中保持 `Network\Cookies`、
+`Sessions\*` 等文件的独占句柄，文件监视器读到这些被锁定的文件就会抛出 EBUSY。
+
+**为什么报错但页面仍能打开**：这是监视器的告警而非致命错误，开发服务器会继续运行，
+但每次热更新扫描到该目录都会重复打印，并可能拖慢响应。
+
+**处理方式**：
+
+1. 结束占用该目录的浏览器进程（例如以 `--user-data-dir=...\work\chrome-profile` 启动的无头实例）。
+2. 删除临时目录：`work\chrome-profile`。
+3. `vite.config.js` 中已加入 `server.watch.ignored: ['**/work/**']`，从源头避免再次监视该目录；
+   `.gitignore` 也已忽略 `work/`。
+
+**验证方式**：在 `work/` 下放置被独占锁定的文件，分别用新旧配置启动开发服务器。
+旧配置稳定复现三条 EBUSY 报错，新配置启动与热更新全程零报错。

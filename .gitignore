@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.idea/
+
+# 本地验证产物：验证脚本、截图、临时浏览器配置等
+work/

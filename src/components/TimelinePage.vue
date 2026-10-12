@@ -1,0 +1,9 @@
+<template>
+  <div><div class="page-head"><div><span class="kicker">TIMELINE / 02</span><h2>一刀一刻，<em>千年传承</em></h2><p>剪纸从民间生活出发，成为连接时间与情感的视觉语言。</p></div></div><section class="timeline"><article v-for="item in items" :key="item.year" class="event"><div class="year">{{item.year}}</div><div class="node"></div><div class="event-copy"><span>{{item.tag}}</span><h3>{{item.title}}</h3><p>{{item.text}}</p></div></article></section></div>
+</template>
+<script setup>
+const items=[{year:'汉代',tag:'起源',title:'从窗花到礼俗',text:'剪纸随造纸术发展而兴起，最初用于祭祀、节庆与生活装饰。'},{year:'唐宋',tag:'流传',title:'民间技艺成形',text:'窗花、门笺等样式在北方乡村流行，纹样逐渐形成地域风格。'},{year:'2006',tag:'入选',title:'国家级非物质文化遗产',text:'中国剪纸列入第一批国家级非物质文化遗产名录，获得系统保护。'},{year:'今天',tag:'新生',title:'从纸面走向世界',text:'设计师与手艺人共同探索跨界表达，让传统纹样进入当代生活。'}]
+</script>
+<style scoped>
+.page-head{margin-bottom:48px}.kicker{font:11px Arial,sans-serif;letter-spacing:2px;color:#a65a48}.page-head h2{margin:10px 0 8px;font-size:clamp(27px,4vw,46px);font-weight:900;letter-spacing:3px}.page-head h2 em{font-style:normal;color:var(--red)}.page-head p{margin:0;color:var(--muted);font-size:14px}.timeline{position:relative;max-width:900px;margin:0 auto;padding:10px 0}.timeline:before{content:'';position:absolute;left:132px;top:0;bottom:0;width:1px;background:#ddc5b5}.event{display:grid;grid-template-columns:110px 44px 1fr;min-height:145px}.year{text-align:right;padding:0 20px 0 0;color:var(--red);font-size:24px;font-weight:700}.node{width:12px;height:12px;margin:7px auto;background:#f8f4ef;border:3px solid var(--red);border-radius:50%;z-index:1}.event-copy{padding:0 0 36px}.event-copy span{font:10px Arial,sans-serif;letter-spacing:2px;color:#b4866c}.event-copy h3{margin:8px 0;font-size:21px}.event-copy p{margin:0;color:var(--muted);line-height:1.9;font-size:14px}@media(max-width:600px){.timeline:before{left:75px}.event{grid-template-columns:62px 28px 1fr}.year{font-size:16px;padding-right:10px}.event-copy h3{font-size:18px}}
+</style>
